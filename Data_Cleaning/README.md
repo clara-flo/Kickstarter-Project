@@ -1,13 +1,9 @@
-✅ **Great question — let’s break this down thoroughly.**
-Below is **why you need this cleaning code**, **why it’s crucial for your SQL analysis**, and **a clear line-by-line walkthrough** of what it does.
 
----
-
-## 🚩 **WHY this cleaning code is necessary**
+## 🚩 WHY do we need to clean this dataset ?
 
 **Problem:**
 
-* Your Kickstarter CSV is **real-world messy**:
+* The Kickstarter CSV Database is **real-world messy**:
 
   * Extra commas → wrong column counts
   * Weird quotes → `"The ""Great"" Book"`
@@ -21,6 +17,7 @@ Below is **why you need this cleaning code**, **why it’s crucial for your SQL 
 * You get partial data → or no data at all.
 * You waste time fighting the same syntax errors.
 
+## ⛏️ So what do we want to do here ?
 **Goal:**
 
 * Get a **clean, reliable CSV** matching your **SQL table schema**, with:
