@@ -20,7 +20,7 @@
 ## ⛏️ So what do we want to do here ?
 **Goal:**
 
-* Get a **clean, reliable CSV** matching your **SQL table schema**, with:
+* Get a **clean, reliable CSV** matching the **SQL table schema**, with:
 
   * Always 17 columns
   * No rogue quotes
@@ -46,14 +46,9 @@ Think of it as the **bouncer** at the door of your database — bad data is refu
 
 ---
 
-## ✅ **Line-by-line EXPLANATION**
-
-Below is the final version you asked for, with **skipping lines** and **row limit**:
-
----
+## ✅ **Cleaning.py Line-by-line EXPLANATION**
 
 ### 🟢 **1️⃣ Imports and config**
-
 ```python
 import csv 
 import re
@@ -226,7 +221,7 @@ max_rows = 30000
 ```
 
 * You skip **known bad lines**.
-* You limit to **30,000** for manageable test loads.
+* You can limit to **30,000** or less for manageable test loads.
 
 ```python
 with open(input_file, 'r', newline='', encoding='latin-1') as infile, \
@@ -288,5 +283,3 @@ print(f"✅ Rows kept: {kept} | Rows skipped: {skipped} | Stopped at line: {line
 
 Without it → your SQL stops on bad rows.
 With it → **fast, repeatable, robust data ingestion**.
-
-If you want, I can wrap this all in a `.py` file with **log output** too — just say **"Yes, package it up!"** 🚀
