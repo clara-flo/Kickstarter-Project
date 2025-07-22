@@ -178,10 +178,9 @@ ORDER BY
 ```
 
 ### ✅ **Answer**
-
 | launch\_year | total\_projects | successful\_projects | success\_rate\_percent |
 | ------------ | --------------- | -------------------- | ---------------------- |
-
+| 2018         | 241             | 0                    | 0.00                   |
 | 2017         | 96,483          | 34,027               | 35.27                  |
 | 2016         | 106,607         | 35,035               | 32.86                  |
 | 2015         | 143,393         | 39,160               | 27.31                  |
@@ -191,6 +190,8 @@ ORDER BY
 | 2011         | 49,058          | 22,639               | 46.15                  |
 | 2010         | 19,312          | 8,466                | 43.84                  |
 | 2009         | 2,447           | 1,067                | 43.60                  |
+| 1970         | 17              | 0                    | 0.00                   |
+
 
 
 ---
@@ -221,4 +222,49 @@ ORDER BY
 * Kickstarter’s early years had **fewer but more successful projects** — novelty, loyal backers, less noise.
 * As the platform scaled, **competition increased**, and creators needed better marketing, planning, and community.
 * The success rate leveling off around 30–35% shows the platform *matured* into a competitive crowdfunding marketplace.
+
+---
+## 🧿   Seasonal trends
+```sql
+SELECT 
+    MONTH(col8) AS launch_month, 
+    COUNT(*) AS total_projects, 
+    SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END) AS successful_projects,
+    ROUND(
+    SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)/COUNT(*) *100,
+    2
+    ) AS success_rate_percent
+FROM
+  projects
+GROUP BY
+  launch_month
+ORDER BY
+    success_rate_percent DESC;
+```
+
+### ✅ Answer
+
+| launch\_month | total\_projects | successful\_projects | success\_rate\_percent |
+| ------------- | --------------- | -------------------- | ---------------------- |
+| 3 (March)     | 63,192          | 23,694               | 37.50%                 |
+| 4 (April)     | 59,659          | 22,325               | 37.42%                 |
+| 10 (October)  | 61,812          | 22,977               | 37.17%                 |
+| 5 (May)       | 61,760          | 22,804               | 36.92%                 |
+| 2 (Feb)       | 55,175          | 20,242               | 36.69%                 |
+| 9 (Sept)      | 57,956          | 21,082               | 36.38%                 |
+| 11 (Nov)      | 61,116          | 22,044               | 36.07%                 |
+| 6 (June)      | 61,041          | 21,967               | 35.99%                 |
+| 1 (Jan)       | 51,508          | 17,565               | 34.10%                 |
+| 8 (Aug)       | 60,523          | 20,399               | 33.70%                 |
+| 7 (July)      | 67,558          | 21,893               | 32.41%                 |
+| 12 (Dec)      | 43,285          | 12,773               | 29.51%                 |
+
+---
+
+### 💡  What we learn 
+
+* The **range is about 8%** (37.5% → 29.5%).
+* So seasonality exists, but it’s moderate. Good timing helps — but strong ideas & marketing matter more.
+* If you want to **maximize success odds**, launching in **spring or early fall** is statistically slightly better.
+* Avoid **late summer** & **December** if you can — backers are distracted.
 
