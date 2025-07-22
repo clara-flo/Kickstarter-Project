@@ -114,8 +114,6 @@ ORDER BY
 
 
 ### 💡  What we learn 
-Great — let’s interpret this  step by step .
-Your output:
 
 #### 1️⃣  Successful vs. Failed: Huge difference 
 
@@ -150,4 +148,51 @@ This pattern is typical of crowdfunding:
 * There’s a clear  threshold effect : once a project reaches a certain momentum, backers pile on → large pledges.
 *  Failed and canceled projects  often stay small → they don’t build trust or attract enough backers.
 * It is important to  Advice for creators  since realistic goals and good promotion are key to crossing the funding line.
+
+---
+## 🧿   Proportion of projects exceeding their fundraising goal, and by how much
+
+
+```sql
+SELECT
+  COUNT(*) AS total_projects, 
+  SUM(CASE WHEN col9 >= col7 THEN 1 ELSE 0 END) AS projects_exceeded_goal,
+  ROUND(
+    SUM(CASE WHEN col9 >= col7 THEN 1 ELSE 0 END) / COUNT(*) * 100,
+    2) AS percent_exceeded_goal,
+
+  ROUND(
+    AVG(CASE WHEN col9 >= col7 THEN (col9- col7)/col7 * 100 ELSE NULL END) ,
+    2
+  ) AS avg_percent_over_goal
+FROM
+  projects; 
+```
+
+### 📌 What this does
+
+* The first query shows:
+
+  * Total number of projects.
+  * Number of projects where `pledged >= goal`.
+  * % of all projects that beat their goal.
+* The second query shows:
+
+  * For *just* the projects that exceeded their goal, how much extra they raised **on average**, as a percent.
+
+
+### ✅ Answer
+
+| total\_projects | projects\_exceeded\_goal | percent\_exceeded\_goal |
+| --------------- | ------------------------ | ----------------------- |
+| 704,585         | 255,539                  | 36.27%                  |
+
+| avg\_percent\_over\_goal |
+| ------------------------ |
+| 769.20%                  |
+
+### 💡  What we learn 
+* Success takes work, but once momentum builds, it often **exceeds expectations**.
+
+* The **average percent over goal** is \~**770%**. This means that on average, these over-goal projects raise **8.7×** their original target. This is because many creators set *low, reachable goals* to guarantee they get funded — once backers pile in, total funding often grows far beyond the original goal.
 
