@@ -157,6 +157,7 @@ FROM
 * The **average percent over goal** is \~**770%**. This means that on average, these over-goal projects raise **8.7×** their original target. This is because many creators set *low, reachable goals* to guarantee they get funded — once backers pile in, total funding often grows far beyond the original goal.
 
 ---
+# 📅 2. Time-based Trends
 
 ## 🧿   Success rate by year
 ```sql
