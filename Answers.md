@@ -15,20 +15,11 @@ FROM
   projects;
 ```
 
-
-### 📌  Explanation 
-
-* `COUNT(*)` → total number of projects in the dataset.
-* `SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)` → counts only projects where the  state  is `'successful'` (in your table, that’s `col10`).
-* `ROUND(..., 2)` → gives you the percentage success rate with 2 decimals.
-
-
 ### ✅  Answer 
 
 | total\_projects | successful\_projects | success\_rate\_percent |
 | --------------- | -------------------- | ---------------------- |
 | 704585          | 249765                | 35.45                  |
-
 
 
 ---
@@ -52,15 +43,6 @@ GROUP BY
 ORDER BY
   success_rate_percent DESC;
 ```
-
-
-### 📌  What this does 
-
-* Groups projects by `main_category` and `category`
-* Counts total projects for each pair
-* Counts how many were successful
-* Calculates success rate (%) per pair
-* Orders results by success rate (highest first)
 
 
 ### ✅  Answer: Three most successful 
@@ -89,17 +71,6 @@ GROUP BY
 ORDER BY
   total_projects DESC;
 ```
-
----
-
-### 📌  What this does 
-
-* Groups all rows by the `state` column (`successful`, `failed`, maybe `canceled` or `undefined` if they exist in your data).
-* Counts how many projects in each state.
-* Computes the  average pledged amount  for each group.
-* Orders them from highest number of projects to lowest.
-
----
 
 ### ✅  Answer 
 
@@ -169,17 +140,6 @@ FROM
   projects; 
 ```
 
-### 📌 What this does
-
-* The first query shows:
-
-  * Total number of projects.
-  * Number of projects where `pledged >= goal`.
-  * % of all projects that beat their goal.
-* The second query shows:
-
-  * For *just* the projects that exceeded their goal, how much extra they raised **on average**, as a percent.
-
 
 ### ✅ Answer
 
@@ -195,4 +155,69 @@ FROM
 * Success takes work, but once momentum builds, it often **exceeds expectations**.
 
 * The **average percent over goal** is \~**770%**. This means that on average, these over-goal projects raise **8.7×** their original target. This is because many creators set *low, reachable goals* to guarantee they get funded — once backers pile in, total funding often grows far beyond the original goal.
+
+---
+
+## 🧿   Success rate by year
+```sql
+SELECT
+  YEAR(col8) AS launch_year,
+  COUNT(*) AS total_projects,
+  SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END) AS successful_projects,
+  ROUND(
+    SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END) / COUNT(*) * 100,
+    2
+  ) AS success_rate_percent
+FROM
+  projects
+GROUP BY
+  launch_year
+ORDER BY
+  launch_year DESC;
+```
+
+### ✅ **Answer**
+
+| launch\_year | total\_projects | successful\_projects | success\_rate\_percent |
+| ------------ | --------------- | -------------------- | ---------------------- |
+
+| 2017         | 96,483          | 34,027               | 35.27                  |
+| 2016         | 106,607         | 35,035               | 32.86                  |
+| 2015         | 143,393         | 39,160               | 27.31                  |
+| 2014         | 126,146         | 39,348               | 31.19                  |
+| 2013         | 83,912          | 36,362               | 43.33                  |
+| 2012         | 76,969          | 33,661               | 43.73                  |
+| 2011         | 49,058          | 22,639               | 46.15                  |
+| 2010         | 19,312          | 8,466                | 43.84                  |
+| 2009         | 2,447           | 1,067                | 43.60                  |
+
+
+---
+
+### 💡  What we learn 
+
+✅ **1️⃣ Early years → high success rates**
+
+* From 2009 to 2012, the success rate hovered around **43–46%**, meaning nearly **half** of projects reached their goal.
+* Why? Kickstarter was newer, fewer projects, more “early adopters” who were deeply supportive.
+* There was *less competition*, and backers trusted the novelty.
+
+✅ **2️⃣ Massive growth → lower success rates**
+
+* By 2013–2014, the number of projects exploded (83k → 126k → 143k in 2015).
+* But success rate **dropped** from \~43% to \~27% by 2015.
+* More creators launched projects, but audience attention didn’t scale linearly → competition for backers increased.
+
+
+✅ **3️⃣ Recent years stay lower**
+
+* After the big peak in 2015, volume slightly shrank (106k in 2016, 96k in 2017).
+* The success rate stabilized around **32–35%**, lower than the early years but not falling off a cliff.
+* By 2017, about 1 in 3 projects succeeded — not bad, but much tougher than Kickstarter’s early “gold rush.”
+
+#### 🔑 Key takeaway 
+
+* Kickstarter’s early years had **fewer but more successful projects** — novelty, loyal backers, less noise.
+* As the platform scaled, **competition increased**, and creators needed better marketing, planning, and community.
+* The success rate leveling off around 30–35% shows the platform *matured* into a competitive crowdfunding marketplace.
 
