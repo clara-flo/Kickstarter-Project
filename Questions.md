@@ -3,7 +3,6 @@
 * What is the overall success rate of Kickstarter projects in the dataset?
 * How does the success rate vary across **main categories** and **categories**?
 * What is the average amount pledged for successful vs. failed projects?
-* Are there categories with unusually high or low success rates?
 * What proportion of projects exceed their fundraising goal, and by how much on average?
 
 ---
