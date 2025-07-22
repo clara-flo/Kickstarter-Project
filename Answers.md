@@ -15,7 +15,7 @@ FROM
   projects;
 ```
 
-### ✅  Answer 
+### 📊  Answer 
 
 | total\_projects | successful\_projects | success\_rate\_percent |
 | --------------- | -------------------- | ---------------------- |
@@ -45,7 +45,7 @@ ORDER BY
 ```
 
 
-### ✅  Answer: Three most successful 
+### 📊  Answer: Three most successful 
 
 | main\_category | category       | total\_projects | successful\_projects | success\_rate\_percent |
 | -------------- | -------------- | --------------- | -------------------- | ---------------------- |
@@ -72,7 +72,7 @@ ORDER BY
   total_projects DESC;
 ```
 
-### ✅  Answer 
+### 📊  Answer 
 
 
 | project\_state | total\_projects | avg\_pledged |
@@ -141,7 +141,7 @@ FROM
 ```
 
 
-### ✅ Answer
+### 📊 Answer
 
 | total\_projects | projects\_exceeded\_goal | percent\_exceeded\_goal |
 | --------------- | ------------------------ | ----------------------- |
@@ -177,7 +177,7 @@ ORDER BY
   launch_year DESC;
 ```
 
-### ✅ **Answer**
+### 📊 **Answer**
 | launch\_year | total\_projects | successful\_projects | success\_rate\_percent |
 | ------------ | --------------- | -------------------- | ---------------------- |
 | 2018         | 241             | 0                    | 0.00                   |
@@ -242,7 +242,7 @@ ORDER BY
     success_rate_percent DESC;
 ```
 
-### ✅ Answer
+### 📊 Answer
 
 | launch\_month | total\_projects | successful\_projects | success\_rate\_percent |
 | ------------- | --------------- | -------------------- | ---------------------- |
@@ -259,7 +259,6 @@ ORDER BY
 | 7 (July)      | 67,558          | 21,893               | 32.41%                 |
 | 12 (Dec)      | 43,285          | 12,773               | 29.51%                 |
 
----
 
 ### 💡  What we learn 
 
@@ -268,3 +267,58 @@ ORDER BY
 * If you want to **maximize success odds**, launching in **spring or early fall** is statistically slightly better.
 * Avoid **late summer** & **December** if you can — backers are distracted.
 
+---
+## 🧿   Duration of the campaign
+```sql
+SELECT 
+    CASE 
+        WHEN DATEDIFF(col6, col8) <= 14 THEN 'Short (<=2 weeks)'
+        WHEN DATEDIFF(col6, col8) <= 30 THEN 'Medium (15–30 days)'
+        WHEN DATEDIFF(col6, col8) <= 60 THEN 'Long (31–60 days)'
+        WHEN DATEDIFF(col6, col8) <= 90 THEN 'Very Long (61–90 days)'
+        ELSE 'Ultra Long (>90 days)'
+      END AS duration_group,
+      COUNT(*) AS total_projects,
+     ROUND(
+        SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END) / COUNT(*) * 100,
+         2
+     ) AS success_rate_percent
+FROM
+    projects
+GROUP BY
+    duration_group
+ORDER BY
+    success_rate_percent DESC;
+```
+### 📊 Answer
+
+| duration\_group        | total\_projects | success\_rate\_percent |
+| ---------------------- | --------------- | ---------------------- |
+| Short (<=2 weeks)      | 25,430          | 48.35%                 |
+| Medium (15–30 days)    | 418,544         | 35.59%                 |
+| Long (31–60 days)      | 250,474         | 33.97%                 |
+| Very Long (61–90 days) | 9,198           | 34.45%                 |
+| Ultra Long (>90 days)  | 939             | 28.22%                 |
+
+### 💡  What we learn 
+
+✅ **1️⃣ Short campaigns succeed *much more often***
+
+* Projects with a **duration of 2 weeks or less** have a **48% success rate** — far above the dataset average.
+* Why? Short campaigns create *urgency*: backers feel they must pledge now or miss out.
+* Also, short campaigns often have strong pre-launch promotion — they know their audience.
+
+✅ **2️⃣ The standard 15–30 day range still works well**
+
+* The biggest bucket by far — **418k projects** — shows a healthy **35.6% success rate**.
+* This aligns with Kickstarter’s recommended \~30-day run time: enough time to gather momentum without losing urgency.
+
+
+✅ **3️⃣ Longer campaigns don’t help — they *hurt***
+
+* **31–60 days**: success rate drops to **33.9%**.
+* **61–90 days**: about the same (34.4%).
+* **Over 90 days**: success rate falls to **28%**.
+* Longer campaigns lose steam — backers get bored, promotion costs go up, momentum fades.
+
+---
