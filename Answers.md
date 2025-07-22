@@ -1,4 +1,4 @@
-## 🧿 ** Calculate the overall success rate**
+## 🧿 Calculate the overall success rate
 
 ```sql
 -- Calculate the overall success rate
@@ -14,14 +14,14 @@ FROM
 ```
 
 
-### 📌 **Explanation**
+### 📌  Explanation 
 
 * `COUNT(*)` → total number of projects in the dataset.
-* `SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)` → counts only projects where the **state** is `'successful'` (in your table, that’s `col10`).
+* `SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)` → counts only projects where the  state  is `'successful'` (in your table, that’s `col10`).
 * `ROUND(..., 2)` → gives you the percentage success rate with 2 decimals.
 
 
-### ✅ **Answer**
+### ✅  Answer 
 
 | total\_projects | successful\_projects | success\_rate\_percent |
 | --------------- | -------------------- | ---------------------- |
@@ -31,7 +31,7 @@ FROM
 
 ---
 
-## 🧿 ** Success rate by main category and category**
+## 🧿   Success rate by main category and category 
 
 ```sql
 SELECT
@@ -52,7 +52,7 @@ ORDER BY
 ```
 
 
-### 📌 **What this does**
+### 📌  What this does 
 
 * Groups projects by `main_category` and `category`
 * Counts total projects for each pair
@@ -61,7 +61,7 @@ ORDER BY
 * Orders results by success rate (highest first)
 
 
-### ✅ **Answer: Three most successful**
+### ✅  Answer: Three most successful 
 
 | main\_category | category       | total\_projects | successful\_projects | success\_rate\_percent |
 | -------------- | -------------- | --------------- | -------------------- | ---------------------- |
@@ -71,7 +71,7 @@ ORDER BY
 
 ---
 
-## 🧿 ** Average amount pledged by project state**
+## 🧿   Average amount pledged by project state 
 
 ```sql
 SELECT
@@ -90,16 +90,16 @@ ORDER BY
 
 ---
 
-### 📌 **What this does**
+### 📌  What this does 
 
 * Groups all rows by the `state` column (`successful`, `failed`, maybe `canceled` or `undefined` if they exist in your data).
 * Counts how many projects in each state.
-* Computes the **average pledged amount** for each group.
+* Computes the  average pledged amount  for each group.
 * Orders them from highest number of projects to lowest.
 
 ---
 
-### ✅ **Answer**
+### ✅  Answer 
 
 
 | project\_state | total\_projects | avg\_pledged |
@@ -111,41 +111,41 @@ ORDER BY
 | suspended      | 3,378           | 9,386.40     |
 
 
-### 💡 **What we learn**
-Great — let’s interpret this **step by step**.
+### 💡  What we learn 
+Great — let’s interpret this  step by step .
 Your output:
 
-#### 1️⃣ **Successful vs. Failed: Huge difference**
+#### 1️⃣  Successful vs. Failed: Huge difference 
 
-* **Successful projects** raise **\~24,000 USD** on average.
-* **Failed projects** raise only **\~1,400 USD** on average.
+*  Successful projects  raise  \~24,000 USD  on average.
+*  Failed projects  raise only  \~1,400 USD  on average.
 * → Clear evidence that there’s a big gap: projects that get traction often get *much* more than the minimum goal, while most failed projects struggle to get off the ground.
 
-#### 2️⃣ **Canceled projects: Mid-range**
+#### 2️⃣  Canceled projects: Mid-range 
 
-* Average for **canceled** projects is **\~2,500 USD** — higher than failed ones but way below successful ones.
-* **Possible reasons:**
+* Average for  canceled  projects is  \~2,500 USD  — higher than failed ones but way below successful ones.
+*  Possible reasons: 
 
-  * Creators often **cancel their own projects** if they see they’re unlikely to succeed.
+  * Creators often  cancel their own projects  if they see they’re unlikely to succeed.
   * Sometimes they relaunch with better strategy/goal.
 
-#### 3️⃣ **Live projects: promising but incomplete**
+#### 3️⃣  Live projects: promising but incomplete 
 
-* **Live** projects are still raising money → they average **\~9,500 USD** so far.
+*  Live  projects are still raising money → they average  \~9,500 USD  so far.
 * Some will likely succeed, others might fail.
 * So their average sits between failed and successful: *in progress*.
 
 
-#### 4️⃣ **Suspended projects: unusual**
+#### 4️⃣  Suspended projects: unusual 
 
-* Suspended means Kickstarter **stopped the project** — e.g. policy violations, fraud, or errors.
-* Their average pledged is **\~9,300 USD** — often suspicious because suspicious projects sometimes raise a surprising amount before being flagged.
+* Suspended means Kickstarter  stopped the project  — e.g. policy violations, fraud, or errors.
+* Their average pledged is  \~9,300 USD  — often suspicious because suspicious projects sometimes raise a surprising amount before being flagged.
 
-### 🔑 **Key takeaway**
+### 🔑  Key takeaway 
 
 This pattern is typical of crowdfunding:
 
-* There’s a clear **threshold effect**: once a project reaches a certain momentum, backers pile on → large pledges.
-* **Failed and canceled projects** often stay small → they don’t build trust or attract enough backers.
-* It is important to **Advice for creators** since realistic goals and good promotion are key to crossing the funding line.
+* There’s a clear  threshold effect : once a project reaches a certain momentum, backers pile on → large pledges.
+*  Failed and canceled projects  often stay small → they don’t build trust or attract enough backers.
+* It is important to  Advice for creators  since realistic goals and good promotion are key to crossing the funding line.
 
