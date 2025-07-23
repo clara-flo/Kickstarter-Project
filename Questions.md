@@ -12,8 +12,6 @@
 * How have success rates changed over time (e.g., by year or month)?
 * Are there seasonal trends? (e.g., Are projects launched in certain months more likely to succeed?)
 * How does the duration between launch date and deadline affect success rates?
-* Do projects with shorter or longer campaign durations perform better?
-
 ---
 
 ## 💸 **3. Fundraising Goals & Pledges**
