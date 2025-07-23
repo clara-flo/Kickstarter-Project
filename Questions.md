@@ -23,7 +23,7 @@
 
 ---
 
-## 🌍 **4. Currency & Geography (if applicable)**
+## 🌍 **4. Currency & Geography**
 
 * Which currencies are most common, and do they have different success rates?
 * Is there any indication that projects in certain currencies (which may proxy for countries) are more successful?
