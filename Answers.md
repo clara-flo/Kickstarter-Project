@@ -322,3 +322,45 @@ ORDER BY
 * Longer campaigns lose steam — backers get bored, promotion costs go up, momentum fades.
 
 ---
+# 💸 **3. Fundraising Goals & Pledges**
+
+## 🧿 Goal ranges for successful vs. failed projects?
+```sql
+SELECT 
+  CASE
+    WHEN col7 <= 1000 THEN 'Under $1,000'
+    WHEN col7 <= 5000 THEN '$1,001–$5,000'
+    WHEN col7 <= 10000 THEN '$5,001–$10,000'
+    WHEN col7 <= 50000 THEN '$10,001–$50,000'
+    WHEN col7 <= 100000 THEN '$50,001–$100,000'
+    ELSE 'Over $100,000'
+  END AS goal_range,
+  ROUND(
+        SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)/COUNT(*)*100,
+        2
+        ) AS success_rate_percent
+FROM 
+  projects
+
+GROUP BY goal_range
+ORDER BY success_rate_percent DESC;
+```
+
+### 📊 Answer
+| goal\_range        | success\_rate\_percent |
+| ------------------ | ---------------------- |
+| Under \$1,000      | 48.89%                 |
+| \$1,001–\$5,000    | 41.24%                 |
+| \$5,001–\$10,000   | 34.56%                 |
+| \$10,001–\$50,000  | 26.84%                 |
+| \$50,001–\$100,000 | 14.36%                 |
+| Over \$100,000     | 7.08%                  |
+
+### 💡  What we learn 
+* Small goals succeed far more often
+Projects with modest goals under $1,000 succeed nearly half the time (48.9%).
+* As soon as goals cross $5,000–$10,000, the success rate drops by about 15 percentage points.
+* There’s a clear negative correlation between the size of a project’s fundraising goal and its probability of success. The smaller the ask, the higher the odds — suggesting that creators benefit from modest, achievable targets and strong pre-launch support.
+
+
+
