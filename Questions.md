@@ -17,13 +17,13 @@
 ## 💸 **3. Fundraising Goals & Pledges**
 
 * What is the distribution of fundraising goals? Are there typical goal ranges for successful vs. failed projects?
-* How does the currency used affect the average goal and pledged amount?
 * Do certain categories tend to have higher goals and larger pledges?
 
 ---
 
 ## 🌍 **4. Currency & Geography**
 
+* How does the currency used affect the average goal and pledged amount?
 * Which currencies are most common, and do they have different success rates?
 * Is there any indication that projects in certain currencies (which may proxy for countries) are more successful?
 
