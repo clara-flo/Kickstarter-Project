@@ -17,7 +17,6 @@
 ## 💸 **3. Fundraising Goals & Pledges**
 
 * What is the distribution of fundraising goals? Are there typical goal ranges for successful vs. failed projects?
-* Is there a correlation between goal amount and success probability?
 * How does the currency used affect the average goal and pledged amount?
 * Do certain categories tend to have higher goals and larger pledges?
 
