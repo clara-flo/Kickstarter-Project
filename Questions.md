@@ -37,29 +37,8 @@
 
 ---
 
-## ⚖️ **6. Goal vs. Outcome**
 
-* What percentage of projects just barely reach their goal vs. significantly surpassing it?
-* For failed projects, how far did they fall short on average?
-* Is there a tipping point for funding goals where projects are more likely to fail?
-
----
-
-## 📈 **7. Time to Launch**
-
-* Do projects launched at certain times of day or week (if time info is available) tend to do better?
-
----
-
-## 🧩 **8. Cross-Relationships**
-
-* Does the relationship between goal amount and pledged amount differ by category?
-* Are there categories where modest goals consistently outperform ambitious ones?
-* Does the effect of campaign duration on success differ by category?
-
----
-
-## 🧮 **9. Statistical Modeling (Advanced)**
+## 🧮 **6. Statistical Modeling (Advanced)**
 
 * What factors are the strongest predictors of project success? (Build a logistic regression model)
 * Can you cluster similar projects based on their goals, pledged amounts, and categories?
@@ -67,7 +46,7 @@
 
 ---
 
-## ✅ **10. Practical & Actionable**
+## ✅ **7. Practical & Actionable**
 
 * What insights could creators use to set realistic goals?
 * Which categories look underserved or overcrowded?
