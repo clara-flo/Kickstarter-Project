@@ -362,5 +362,47 @@ Projects with modest goals under $1,000 succeed nearly half the time (48.9%).
 * As soon as goals cross $5,000–$10,000, the success rate drops by about 15 percentage points.
 * There’s a clear negative correlation between the size of a project’s fundraising goal and its probability of success. The smaller the ask, the higher the odds — suggesting that creators benefit from modest, achievable targets and strong pre-launch support.
 
+## 🧿 Currency impact 
+```sql
+SELECT 
+  col5 AS currency, 
+  ROUND(AVG(col7)) AS avg_goal, 
+  ROUND(AVG(col9)) AS avg_pledged, 
+  ROUND(
+    SUM(CASE WHEN col10 = 'successful' THEN 1 ELSE 0 END)/COUNT(*) * 100,
+    2
+  ) AS success_rate_percent
+FROM 
+  projects
+GROUP BY
+  col5
+ORDER BY avg_goal DESC;
+```
 
+### 📊 Answer
+| Currency | Avg Goal  | Approx Goal (USD) | Avg Pledged | Approx Pledged (USD) | Success % |
+| -------- | --------- | ----------------- | ----------- | -------------------- | --------- |
+| JPY      | 1,890,595 | \~\$12,604        | 282,448     | \~\$1,883            | 14.93%    |
+| NOK      | 528,137   | \~\$52,814        | 27,797      | \~\$2,780            | 22.27%    |
+| SEK      | 352,589   | \~\$35,259        | 65,427      | \~\$6,543            | 27.08%    |
+| MXN      | 329,311   | \~\$19,371        | 23,829      | \~\$1,402            | 22.15%    |
+| CHF      | 237,502   | \~\$263,891       | 18,781      | \~\$20,868           | 24.51%    |
+| HKD      | 179,888   | \~\$23,064        | 129,179     | \~\$16,563           | 35.86%    |
+| DKK      | 172,209   | \~\$25,328        | 41,156      | \~\$6,052            | 30.42%    |
+| AUD      | 66,838    | \~\$44,559        | 7,043       | \~\$4,695            | 25.23%    |
+| EUR      | 62,331    | \~\$67,762        | 8,504       | \~\$9,242            | 22.31%    |
+| CAD      | 51,067    | \~\$37,558        | 7,277       | \~\$5,351            | 27.69%    |
+| USD      | 40,297    | \~\$40,297        | 9,726       | \~\$9,726            | 37.16%    |
+| NZD      | 28,332    | \~\$17,170        | 7,887       | \~\$4,778            | 29.61%    |
+| GBP      | 27,749    | \~\$35,130        | 4,626       | \~\$5,857            | 35.26%    |
+| SGD      | 20,769    | \~\$15,392        | 15,729      | \~\$11,652           | 33.64%    |
 
+### 💡  What we learn 
+
+✅ **1️⃣ USD, GBP, and HKD markets have the highest success rates.**
+These are regions where Kickstarter has a strong backer base. USD campaigns are the largest portion overall.
+
+✅ **3️⃣ Some currencies (MXN, NOK, SEK) show large *goals* but very low *average pledged*.**
+* Less active backer base.
+* Overambitious goals.
+* Less traction or lower trust.
