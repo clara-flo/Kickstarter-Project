@@ -406,3 +406,57 @@ These are regions where Kickstarter has a strong backer base. USD campaigns are 
 * Less active backer base.
 * Overambitious goals.
 * Less traction or lower trust.
+
+---
+## 🧿   Top goal and pledged categories
+```sql
+SELECT 
+    col3 AS category,
+    ROUND(
+        AVG(col7),
+        2
+    ) AS avg_goal,
+    ROUND(
+        AVG(col9),
+        2
+    ) AS avg_pledged
+FROM 
+    projects
+GROUP BY 
+    category
+ORDER BY avg_goal DESC
+LIMIT 3;
+```
+
+### 📊 **Top 3 average fundraising goals**
+
+| Category       | avg\_goal (USD) | avg\_pledged (USD) |
+| -------------- | --------------- | ------------------ |
+| Movie Theaters | 1,595,563.44  | 9,514.06         |
+| Fantasy        | 582,911.73    | 9,073.42         |
+| Video          | 552,930.80    | 1,608.20         |
+
+
+### 📊 **Top 3 average amount pledged**
+| Category         | avg\_goal (USD) | avg\_pledged (USD) |
+| ---------------- | --------------- | ------------------ |
+| Camera Equipment | 38,715.42       | 80,466.82          |
+| 3D Printing      | 45,150.07       | 65,399.30          |
+| Sound            | 45,056.01       | 61,845.88          |
+
+### 💡  What we learn 
+
+1️⃣ **Ambition vs. reality**
+
+* The *Top 3 goals* list shows **huge average goals** — but the average pledged is a tiny fraction of that.
+
+* The *Top 3 pledged* categories have **moderate goals but high pledged averages** — they **overperform**.
+
+
+2️⃣ **Backer appeal and product type**
+
+* *Camera Equipment*, *3D Printing*, and *Sound* all relate to **hardware or tangible tools** — these tend to do well on Kickstarter.
+* In contrast, *Movie Theaters* or *Fantasy* often depend on local communities or niche fanbases — and it’s much harder to gather millions in small pledges.
+
+
+
