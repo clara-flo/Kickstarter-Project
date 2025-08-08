@@ -27,26 +27,11 @@
 * Which currencies are most common, and do they have different success rates?
 * Is there any indication that projects in certain currencies (which may proxy for countries) are more successful?
 
----
-
-## 🔍 **5. Project Characteristics**
-
-* Are there naming patterns for successful projects? (e.g., length of name, keywords)
-* Does the main category or sub-category significantly influence how much people pledge on average?
-* What is the distribution of pledged amounts across categories — are there outliers or blockbuster projects?
+bility based on goal, category, duration, and launch date?
 
 ---
 
-
-## 🧮 **6. Statistical Modeling (Advanced)**
-
-* What factors are the strongest predictors of project success? (Build a logistic regression model)
-* Can you cluster similar projects based on their goals, pledged amounts, and categories?
-* Can you forecast success probability based on goal, category, duration, and launch date?
-
----
-
-## ✅ **7. Practical & Actionable**
+## ✅ **5. Practical & Actionable**
 
 * What insights could creators use to set realistic goals?
 * Which categories look underserved or overcrowded?
